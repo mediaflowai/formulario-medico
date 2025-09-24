@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Flow AI - Formulario Médico</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 15px;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        button {
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .required { color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="brand">MEDIA FLOW AI</div>
+            <p>Formulario de Registro Médico</p>
+        </div>
+
+        <form name="doctor-registration" method="POST" data-netlify="true">
+            <div class="form-group">
+                <label>Nombre Completo del Doctor <span class="required">*</span></label>
+                <input type="text" name="doctorName" required placeholder="Dr./Dra. [Nombre completo]">
+            </div>
+
+            <div class="form-group">
+                <label>Especialidad <span class="required">*</span></label>
+                <input type="text" name="specialty" required placeholder="Ej: Cardiología, Pediatría, etc.">
+            </div>
+
+            <div class="form-group">
+                <label>Años de Experiencia <span class="required">*</span></label>
+                <input type="number" name="experience" required min="1" max="50" placeholder="Años de experiencia">
+            </div>
+
+            <div class="form-group">
+                <label>Estudios Realizados <span class="required">*</span></label>
+                <textarea name="studies" required rows="4" placeholder="Detalle sus estudios, universidades, fechas, especialidades..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Dirección de Consultorio <span class="required">*</span></label>
+                <textarea name="address" required rows="3" placeholder="Dirección completa del consultorio"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Teléfono de Consultorio <span class="required">*</span></label>
+                <input type="tel" name="phone" required placeholder="(555) 123-4567">
+            </div>
+
+            <div class="form-group">
+                <label>WhatsApp para Emergencias <span class="required">*</span></label>
+                <input type="tel" name="whatsapp" required placeholder="Número de WhatsApp">
+            </div>
+
+            <div class="form-group">
+                <label>Costo de Consulta General <span class="required">*</span></label>
+                <input type="text" name="consultationCost" required placeholder="Ej: $500 - $800 MXN">
+            </div>
+
+            <div class="form-group">
+                <label>Comentarios Adicionales</label>
+                <textarea name="comments" rows="4" placeholder="Cualquier información adicional que desee compartir..."></textarea>
+            </div>
+
+            <button type="submit">Enviar Información</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            alert('¡Formulario enviado correctamente!');
+        });
+    </script>
+</body>
+</html>
