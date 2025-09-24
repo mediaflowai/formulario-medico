@@ -3,127 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Flow AI - Formulario Médico</title>
+    <meta name="description" content="Formulario de registro para doctores - Media Flow AI">
+    <title>Media Flow AI - Formulario de Registro para Doctores</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            color: white;
+            padding: 20px;
         }
+
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.95);
-            padding: 30px;
-            border-radius: 15px;
-            color: #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
+
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e8f4f8;
         }
-        .brand {
-            font-size: 2rem;
-            font-weight: bold;
+
+        .logo-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00bcd4, #3f51b5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(0, 188, 212, 0.3);
+        }
+
+        .brand-text {
+            text-align: left;
+        }
+
+        .brand-name {
+            font-size: 2.5rem;
+            font-weight: 800;
             color: #1a365d;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
+
+        .brand-tagline {
+            font-size: 1rem;
+            color: #00bcd4;
+            font-weight: 600;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header > p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+            padding: 25px;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 15px;
+            border-left: 4px solid #3498db;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: #3498db;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
             color: #2c3e50;
+            font-size: 0.95rem;
         }
-        input, textarea, select {
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        input[type="url"],
+        select,
+        textarea {
             width: 100%;
-            padding: 12px;
+            padding: 12px 15px;
             border: 2px solid #e1e8ed;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
-            box-sizing: border-box;
+            transition: all 0.3s ease;
+            background: white;
         }
-        button {
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .special-requests textarea {
+            min-height: 150px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border: 2px dashed #6c757d;
+        }
+
+        .special-requests textarea:focus {
+            border-color: #28a745;
+            background: white;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: white;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        .btn-submit {
             background: linear-gradient(45deg, #3498db, #9b59b6);
             color: white;
-            padding: 15px 30px;
+            padding: 15px 40px;
             border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
             display: block;
-            margin: 20px auto;
+            margin: 40px auto 0;
+            min-width: 200px;
         }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.4);
         }
-        .required { color: #e74c3c; }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .schedule-table th,
+        .schedule-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e1e8ed;
+        }
+
+        .schedule-table th {
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        .schedule-table input[type="time"] {
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .special-section {
+            background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(23, 162, 184, 0.1));
+            border-left: 4px solid #28a745;
+        }
+
+        .special-icon {
+            background: linear-gradient(45deg, #28a745, #17a2b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .brand-text {
+                text-align: center;
+            }
+            
+            .brand-name {
+                font-size: 2rem;
+            }
+            
+            .header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <div class="brand">MEDIA FLOW AI</div>
-            <p>Formulario de Registro Médico</p>
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-brain" style="color: white; font-size: 2rem;"></i>
+                </div>
+                <div class="brand-text">
+                    <div class="brand-name">MEDIA FLOW AI</div>
+                    <div class="brand-tagline">automatiza/conecta/evoluciona</div>
+                </div>
+            </div>
+            <h2><i class="fas fa-user-md"></i> Formulario de Registro Médico</h2>
+            <p>Complete la información para crear su perfil profesional</p>
         </div>
 
-        <form action="https://formspree.io/f/mrbygjkn" method="POST">
-                <label>Nombre Completo del Doctor <span class="required">*</span></label>
-                <label>Especialidad <span class="required">*</span></label>
-                <input type="text" name="specialty" required placeholder="Ej: Cardiología, Pediatría, etc.">
+        <form id="doctorForm" action="https://formspree.io/f/mrbygjkn" method="POST">
+            <!-- Información Personal -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-user"></i>
+                    Información Personal
+                </h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="doctorName">Nombre Completo del Doctor <span class="required">*</span></label>
+                        <input type="text" id="doctorName" name="doctorName" required placeholder="Dr./Dra. [Nombre completo]">
+                    </div>
+                    <div class="form-group">
+                        <label for="specialty">Especialidad <span class="required">*</span></label>
+                        <input type="text" id="specialty" name="specialty" required placeholder="Ej: Cardiología, Pediatría, etc.">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Años de Experiencia <span class="required">*</span></label>
+                    <input type="number" id="experience" name="experience" required min="1" max="50" placeholder="Años de experiencia profesional">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Años de Experiencia <span class="required">*</span></label>
-                <input type="number" name="experience" required min="1" max="50" placeholder="Años de experiencia">
+            <!-- Formación Académica -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-graduation-cap"></i>
+                    Formación Académica
+                </h2>
+                <div class="form-group">
+                    <label for="studies">Estudios Realizados <span class="required">*</span></label>
+                    <textarea id="studies" name="studies" required placeholder="Detalle sus estudios, universidades, fechas, especialidades, maestrías, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="associations">Asociaciones y/o Sociedades Médicas</label>
+                    <textarea id="associations" name="associations" placeholder="Mencione las asociaciones profesionales a las que pertenece"></textarea>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Estudios Realizados <span class="required">*</span></label>
-                <textarea name="studies" required rows="4" placeholder="Detalle sus estudios, universidades, fechas, especialidades..."></textarea>
+            <!-- Información de Consultorios -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Consultorios y Contacto
+                </h2>
+                <div class="form-group">
+                    <label for="addresses">Dirección de Consultorio(s) <span class="required">*</span></label>
+                    <textarea id="addresses" name="addresses" required placeholder="Dirección completa de sus consultorios (si tiene varios, sepárelos con líneas)"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="officePhones">Teléfono(s) de Consultorio <span class="required">*</span></label>
+                        <input type="tel" id="officePhones" name="officePhones" required placeholder="Ej: (555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyPhone">Teléfono de Emergencias (WhatsApp) <span class="required">*</span></label>
+                        <input type="tel" id="emergencyPhone" name="emergencyPhone" required placeholder="Número de WhatsApp para emergencias">
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Dirección de Consultorio <span class="required">*</span></label>
-                <textarea name="address" required rows="3" placeholder="Dirección completa del consultorio"></textarea>
+            <!-- Horarios de Consulta -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-clock"></i>
+                    Horarios de Consulta
+                </h2>
+                <table class="schedule-table">
+                    <thead>
+                        <tr>
+                            <th>Día</th>
+                            <th>Atiende</th>
+                            <th>Horario Inicio</th>
+                            <th>Horario Fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lunes</strong></td>
+                            <td><input type="checkbox" name="monday_active"></td>
+                            <td><input type="time" name="monday_start"></td>
+                            <td><input type="time" name="monday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Martes</strong></td>
+                            <td><input type="checkbox" name="tuesday_active"></td>
+                            <td><input type="time" name="tuesday_start"></td>
+                            <td><input type="time" name="tuesday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Miércoles</strong></td>
+                            <td><input type="checkbox" name="wednesday_active"></td>
+                            <td><input type="time" name="wednesday_start"></td>
+                            <td><input type="time" name="wednesday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Jueves</strong></td>
+                            <td><input type="checkbox" name="thursday_active"></td>
+                            <td><input type="time" name="thursday_start"></td>
+                            <td><input type="time" name="thursday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Viernes</strong></td>
+                            <td><input type="checkbox" name="friday_active"></td>
+                            <td><input type="time" name="friday_start"></td>
+                            <td><input type="time" name="friday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sábado</strong></td>
+                            <td><input type="checkbox" name="saturday_active"></td>
+                            <td><input type="time" name="saturday_start"></td>
+                            <td><input type="time" name="saturday_end"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Domingo</strong></td>
+                            <td><input type="checkbox" name="sunday_active"></td>
+                            <td><input type="time" name="sunday_start"></td>
+                            <td><input type="time" name="sunday_end"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="form-group">
-                <label>Teléfono de Consultorio <span class="required">*</span></label>
-                <input type="tel" name="phone" required placeholder="(555) 123-4567">
+            <!-- Costos y Servicios -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-dollar-sign"></i>
+                    Costos y Servicios
+                </h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="consultationCost">Costo de Consulta General <span class="required">*</span></label>
+                        <input type="text" id="consultationCost" name="consultationCost" required placeholder="Ej: $500 - $800 MXN">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="surgicalServices">Costo Aproximado de Cirugías/Servicios Principales</label>
+                    <textarea id="surgicalServices" name="surgicalServices" placeholder="Detalle los servicios principales de su especialidad y sus costos aproximados"></textarea>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>WhatsApp para Emergencias <span class="required">*</span></label>
-                <input type="tel" name="whatsapp" required placeholder="Número de WhatsApp">
+            <!-- Redes Sociales -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-share-alt"></i>
+                    Redes Sociales y Contacto Digital
+                </h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="facebook">Facebook</label>
+                        <input type="url" id="facebook" name="facebook" placeholder="https://facebook.com/tu-perfil">
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram">Instagram</label>
+                        <input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/tu-perfil">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="linkedin">LinkedIn</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/tu-perfil">
+                    </div>
+                    <div class="form-group">
+                        <label for="website">Sitio Web Personal</label>
+                        <input type="url" id="website" name="website" placeholder="https://tu-sitio-web.com">
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Costo de Consulta General <span class="required">*</span></label>
-                <input type="text" name="consultationCost" required placeholder="Ej: $500 - $800 MXN">
+            <!-- Aseguradoras -->
+            <div class="form-section">
+                <h2 class="section-title">
+                    <i class="fas fa-shield-alt"></i>
+                    Aseguradoras
+                </h2>
+                <label>¿Trabaja con Aseguradoras? Seleccione las que apliquen:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="IMSS">
+                        <label>IMSS</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="ISSSTE">
+                        <label>ISSSTE</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="Seguro Popular">
+                        <label>Seguro Popular</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="Seguros Monterrey">
+                        <label>Seguros Monterrey</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="GNP">
+                        <label>GNP</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="Metlife">
+                        <label>Metlife</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="Allianz">
+                        <label>Allianz</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="insurers" value="AXA">
+                        <label>AXA</label>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="otherInsurers">Otras Aseguradoras</label>
+                    <input type="text" id="otherInsurers" name="otherInsurers" placeholder="Mencione otras aseguradoras con las que trabaja">
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Comentarios Adicionales</label>
-                <textarea name="comments" rows="4" placeholder="Cualquier información adicional que desee compartir..."></textarea>
+            <!-- Peticiones Especiales -->
+            <div class="form-section special-section special-requests">
+                <h2 class="section-title">
+                    <i class="fas fa-comments special-icon"></i>
+                    Peticiones o Comentarios Especiales
+                </h2>
+                <div class="form-group">
+                    <label for="specialRequests">¿Tiene alguna petición especial o comentario adicional que desee incluir?</label>
+                    <textarea 
+                        id="specialRequests" 
+                        name="specialRequests" 
+                        placeholder="Este es su espacio para compartir cualquier información adicional, peticiones especiales, comentarios sobre servicios únicos que ofrece, condiciones especiales de atención, o cualquier detalle que considere importante mencionar y que no haya sido cubierto en las secciones anteriores.
+
+Ejemplos:
+• Atención a domicilio en casos especiales
+• Servicios de telemedicina
+• Descuentos para grupos específicos
+• Métodos de pago especiales
+• Comentarios sobre su filosofía de atención
+• Servicios adicionales que ofrece
+• Cualquier otra información relevante"
+                        style="min-height: 200px;"
+                    ></textarea>
+                </div>
             </div>
 
-            <button type="submit">Enviar Información</button>
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i>
+                Enviar Información
+            </button>
         </form>
     </div>
 
     <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-            alert('¡Formulario enviado correctamente!');
+        document.getElementById('doctorForm').addEventListener('submit', function(e) {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        const specialTextarea = document.getElementById('specialRequests');
+        if (specialTextarea) {
+            specialTextarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.max(200, this.scrollHeight) + 'px';
+            });
+        }
+
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e1e8ed';
+                }
+            });
         });
     </script>
 </body>
 </html>
-
